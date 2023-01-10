@@ -13,8 +13,8 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    await message.answer(text='Здравствуй, смертный\n'
-                        'Моё имя Астарот, я - высший демон!')
+    await message.answer(text=f'Здравствуй, {message.from_user.first_name}\n'
+                        'Моё имя Астарот \nя - высший демон!')
     await message.delete()
 
 

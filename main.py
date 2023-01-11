@@ -7,32 +7,39 @@ from random import choice
 load_dotenv()
 
 
-bot = Bot(os.getenv('My_Token'))
+bot = Bot(os.getenv('MY_TOKEN'))
 dp = Dispatcher(bot)
 
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    await message.answer(text=f'Здравствуй, {message.from_user.first_name}\n'
-                        'Моё имя Астарот \nя - высший демон!')
+    await message.answer(text=f'''
+Здравствуй, {message.from_user.first_name}
+Моё имя Астарот 
+Я - высший демон!
+''')
     await message.delete()
 
 
 @dp.message_handler(commands=['help'])
 async def i_am_trying(message: types.Message):
-    await message.answer(text=f'/start - Я представлюсь как следует, чтобы тебе раз и навсегда стало ясно, кто перед тобой!\n'
-                        f'/help - Ты прямо сейчас на нёё нажал...\n'
-                        f'/myinfo - Я расскажу про тебя!\n'
-                        f'/picture - Отправлю тебе фотографии своих друзей с Преисподни')
+    await message.answer(text='''
+/start - Я представлюсь как следует, чтобы тебе раз и навсегда стало ясно!
+/help - Ты прямо сейчас на нёё нажал...
+/myinfo - Я расскажу про тебя!
+/picture - Отправлю тебе фотографии своих друзей с 
+''')
     await message.delete()
 
 
 @dp.message_handler(commands=['myinfo'])
 async def send_info(message: types.Message):
-    await message.answer(text=f'Я всё о тебе знаю\n'
-                        f'Твой id: {message.from_user.id}\n'
-                        f'Твоё имя: {message.from_user.first_name}\n'
-                        f'Твой ник: {message.from_user.username}.')
+    await message.answer(text=f'''
+Я всё о тебе знаю
+Твой id: {message.from_user.id}
+Твоё имя: {message.from_user.first_name}
+Твой ник: {message.from_user.username}.
+''')
     await message.delete()
 
 

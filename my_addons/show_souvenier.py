@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 buy_item_kb = InlineKeyboardMarkup()
-buy_item_kb.add(InlineKeyboardButton('Купить', callback_data='buy item'))
+buy_item_kb.add(InlineKeyboardButton('Купить', callback_data='buy_item'))
 
 
 async def show_souvenier(message: types.Message):

@@ -18,3 +18,8 @@ INFO_TEXT = '''
 Твоё имя: {first_name}
 Твой ник: {username}.
 '''
+
+
+BAD_TEXT = """
+{first_name} ругается! Что будем делать с ним?
+"""

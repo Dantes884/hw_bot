@@ -15,20 +15,31 @@ from my_addons.show_magnets import show_magnets
 from my_addons.show_switshots import show_switshots
 from my_addons.buy_item import buy_item
 from my_addons.form_exe import (
-	Form,
-	cancel_handler,
-	name_get,
-	adress_get,
-	get_age,
-	age_check,
+    Form,
+    cancel_handler,
+    name_get,
+    adress_get,
+    get_age,
+    age_check,
     day_check,
-	process_done
+    process_done
 )
 from my_addons.kick_bot import (
-	check_message,
-	ban_user
+    check_message,
+    ban_user
+)
+from DB.database_for_bot import (
+    init,
+    create_table,
+    make_full_products
 )
 from my_addons.echo_command import chsv
+
+
+async def startup(_):
+    init()
+    create_table()
+    make_full_products()
 
 load_dotenv()
 bot = Bot(getenv('MY_TOKEN'))
@@ -61,4 +72,4 @@ dp.register_message_handler(check_message)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup = startup)

@@ -31,4 +31,3 @@ async def ban_user(message: types.Message):
                         chat_id=message.chat.id,
                         user_id=message.reply_to_message.from_user.id
                     )
-        return False

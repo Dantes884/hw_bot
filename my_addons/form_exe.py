@@ -2,10 +2,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
-import DB.database_for_bot
+from DB.database_for_bot import make_full_order
 
 
 class Form(StatesGroup):
+    product_id = State()
     name = State()
     adress = State()
     age = State()
@@ -14,6 +15,9 @@ class Form(StatesGroup):
 
 
 async def cancel_handler(message: types.Message, state: FSMContext):
+    """
+    Отмена FSM
+    """
     current_state = await state.set_state()
     if current_state is None:
         return
@@ -24,12 +28,18 @@ async def cancel_handler(message: types.Message, state: FSMContext):
         reply_markup=types.ReplyKeyboardRemove())
 
 
-async def name_get(message: types.Message):
+async def name_get(cb: types.CallbackQuery, state: FSMContext):
     """
-    Узнаем имя
+    Узнаем имя, старт FSM
     """
-    await Form.name.set()
-    await message.reply("Введите ваше имя:")
+    await Form.product_id.set()
+    async with state.proxy() as data:
+        data['product_id'] = int(cb.data.replace('buy_item ', ''))
+    await Form.next()
+    await cb.bot.send_message(
+        chat_id=cb.from_user.id,
+        text="Введите ваше имя:"
+    )
 
 
 async def adress_get(message: types.Message, state: FSMContext):
@@ -113,6 +123,8 @@ async def process_done(message: types.Message, state: FSMContext):
     """
     Сохраняем данные
     """
+    async with state.proxy() as data:
+        make_full_order(data)
     await state.finish()
     await message.reply(
         "Спасибо. Я запомнил.",

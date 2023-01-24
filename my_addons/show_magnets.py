@@ -2,8 +2,10 @@ from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from DB.database_for_bot import get_products
 
-buy_item_kb = InlineKeyboardMarkup()
-buy_item_kb.add(InlineKeyboardButton('Купить', callback_data='buy_item'))
+def buy_item_kb(product_id):
+    buy_item_kb = InlineKeyboardMarkup()
+    buy_item_kb.add(InlineKeyboardButton('Купить', callback_data=f'buy_item {product_id}'))
+    return buy_item_kb
 
 
 async def show_magnets(message: types.Message):
@@ -17,17 +19,17 @@ async def show_magnets(message: types.Message):
     await message.answer_photo(
         open(magnet_hell[3], 'rb'),
         caption=f'{magnet_hell[1]}, стоимость - {magnet_hell[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(magnet_hell[0])
     )
     await message.answer_photo(
         open(magnet_underworld[3], 'rb'),
         caption=f'{magnet_underworld[1]}, стоимость - {magnet_underworld[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(magnet_underworld[0])
     )
     await message.answer_photo(
         open(magnet_abyss[3], 'rb'),
         caption=f'{magnet_abyss[1]}, стоимость - {magnet_abyss[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(magnet_abyss[0])
     )
 
 

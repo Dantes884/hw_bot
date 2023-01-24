@@ -2,8 +2,10 @@ from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from DB.database_for_bot import get_products
 
-buy_item_kb = InlineKeyboardMarkup()
-buy_item_kb.add(InlineKeyboardButton('Купить', callback_data='buy_item'))
+def buy_item_kb(product_id):
+    buy_item_kb = InlineKeyboardMarkup()
+    buy_item_kb.add(InlineKeyboardButton('Купить', callback_data=f'buy_item {product_id}'))
+    return buy_item_kb
 
 
 async def show_switshots(message: types.Message):
@@ -17,17 +19,17 @@ async def show_switshots(message: types.Message):
     await message.answer_photo(
         open(demon_switshot[3], 'rb'),
         caption=f'{demon_switshot[1]}, стоимость - {demon_switshot[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(demon_switshot[0])
     )
     await message.answer_photo(
         open(switshot_hell_overcomplete[3], 'rb'),
         caption=f'{switshot_hell_overcomplete[1]}, стоимость - {switshot_hell_overcomplete[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(switshot_hell_overcomplete[0])
     )
     await message.answer_photo(
         open(switshot_when_i_come[3], 'rb'),
         caption=f'{switshot_when_i_come[1]}, стоимость - {switshot_when_i_come[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(switshot_when_i_come[0])
     )
     # await message.answer_photo(
     #     open('assortiments/49_3-800x800.jpg', 'rb'),

@@ -2,8 +2,10 @@ from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from DB.database_for_bot import get_products
 
-buy_item_kb = InlineKeyboardMarkup()
-buy_item_kb.add(InlineKeyboardButton('Купить', callback_data='buy_item'))
+def buy_item_kb(product_id):
+    buy_item_kb = InlineKeyboardMarkup()
+    buy_item_kb.add(InlineKeyboardButton('Купить', callback_data=f'buy_item {product_id}'))
+    return buy_item_kb
 
 
 async def show_souvenier(message: types.Message):
@@ -17,17 +19,17 @@ async def show_souvenier(message: types.Message):
     await message.answer_photo(
         open(lucifer[3], 'rb'),
         caption=f'{lucifer[1]}, стоимость - {lucifer[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(lucifer[0])
     )
     await message.answer_photo(
         open(bafomet_wheel[3], 'rb'),
         caption=f'{bafomet_wheel[1]}, стоимость - {bafomet_wheel[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(bafomet_wheel[0])
     )
     await message.answer_photo(
         open(succub_poster[3], 'rb'),
         caption=f'{succub_poster[1]}, стоимость - {succub_poster[2]}',
-        reply_markup=buy_item_kb
+        reply_markup=buy_item_kb(succub_poster[0])
     )
     # await message.answer_photo(
     #     open('assortiments/2604061696_w700_h500_kollektsionnaya-statuetka-veronese.webp', 'rb'),

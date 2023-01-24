@@ -79,13 +79,19 @@ def make_full_order(data):
     """
         Заполняем таблицу order
     """
+    data = data.as_dict()
     cur.execute("""INSERT INTO orders(
         username,
         adress,
         age,
         day,
         product_id
-    ) VALUES (?,?,?,?,?)""", data)
+    ) VALUES (:user_name,:adress,:age,:day,:product_id)""",
+                {'user_name': data['name'],
+                'adress': data['adress'],
+                 'age': data['age'],
+                 'day': data['day'],
+                 'product_id': data['product_id']})
     db.commit()
 
 

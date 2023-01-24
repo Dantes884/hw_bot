@@ -39,7 +39,7 @@ from my_addons.echo_command import chsv
 async def startup(_):
     init()
     create_table()
-    make_full_products()
+
 
 load_dotenv()
 bot = Bot(getenv('MY_TOKEN'))
@@ -55,8 +55,8 @@ dp.register_callback_query_handler(shop_adress, text='shop_adress')
 dp.register_message_handler(show_souvenier, Text(equals='Сувениры с Преисподни'))
 dp.register_message_handler(show_switshots, Text(equals='Свитшоты с Преисподни'))
 dp.register_message_handler(show_magnets, Text(equals='Магниты с Преисподни'))
-dp.register_callback_query_handler(buy_item, text='buy_item')
-dp.register_message_handler(name_get, commands=['form'])
+dp.register_callback_query_handler(name_get, Text(startswith='buy_item '))
+# dp.register_message_handler(name_get, commands=['form'])
 dp.register_message_handler(name_get, Text(equals='Нет'), state=Form.done)
 dp.register_message_handler(cancel_handler, state='*', commands='cancel')
 dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')

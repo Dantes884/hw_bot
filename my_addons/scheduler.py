@@ -8,21 +8,21 @@ async def schedule_command(message: types.Message):
     """
     Хендлер для того, чтбы получить команду от юзера и сохранить его id
     """
-    global chat_id
+    global chat_id, remember
     chat_id = message.from_user.id
+    remember = message.text.lower().replace('напомнить ', '')
     await message.answer(
         text="Хорошо"
     )
-    remind_text = message.text.replace('Напомнить ', '')
 
 
-async def notify(message: types.Message):
+async def notify():
     """
     напоминалка
     """
-    await bot.send_message(
+    bot.send_message(
         chat_id=chat_id,
-        text=message.text.replace('Напомнить ', '')
+        text=remember
     )
 
 
@@ -34,4 +34,3 @@ async def scheduler():
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
-

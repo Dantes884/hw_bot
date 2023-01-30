@@ -6,7 +6,7 @@ except ImportError:
     import trollius as asyncio
 from config import dp
 from my_addons.admin_command import start_command
-from my_addons.scheduler import scheduler, schedule_command, notify
+from my_addons.scheduler import scheduler, schedule_command
 from my_addons.help_command import i_am_trying
 from my_addons.myinfo_command import send_info
 from my_addons.pictures_command import friend_picture
@@ -41,10 +41,7 @@ async def startup(_):
     """
     init()
     create_table()
-    asyncio.create_task(scheduler())
-
-
-
+    asyncio.run(scheduler())
 
 
 dp.register_message_handler(start_command, commands=['start'])
@@ -67,7 +64,6 @@ dp.register_message_handler(day_check, state=Form.day)
 dp.register_message_handler(process_done, Text(equals='Да'), state=Form.done)
 dp.register_message_handler(ban_user, commands=['да'], commands_prefix='!')
 dp.register_message_handler(schedule_command, Text(startswith="Напомнить "))
-# dp.register_message_handler(notify, Text(startswith="Напомнить "))
 dp.register_message_handler(check_message)
 
 

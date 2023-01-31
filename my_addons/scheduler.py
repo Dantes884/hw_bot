@@ -20,7 +20,7 @@ async def notify():
     """
     напоминалка
     """
-    bot.send_message(
+    await bot.send_message(
         chat_id=chat_id,
         text=remember
     )

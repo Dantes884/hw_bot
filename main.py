@@ -1,9 +1,6 @@
 from aiogram import executor
 from aiogram.dispatcher.filters import Text
-try:
-    import asyncio
-except ImportError:
-    import trollius as asyncio
+import asyncio
 from config import dp
 from my_addons.admin_command import start_command
 from my_addons.scheduler import scheduler, schedule_command

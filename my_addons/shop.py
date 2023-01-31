@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 shop_kb = ReplyKeyboardMarkup(resize_keyboard=True)
 shop_kb.add(

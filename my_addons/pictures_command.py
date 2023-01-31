@@ -1,6 +1,7 @@
-from aiogram import Bot, types
-from random import choice
 from os import listdir
+from random import choice
+
+from aiogram import Bot, types
 
 
 async def friend_picture(message: types.Message):

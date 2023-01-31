@@ -1,6 +1,7 @@
 from aiogram import types
-from my_addons.constants import WELCOME_USER
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+from my_addons.constants import WELCOME_USER
 
 start_kb = InlineKeyboardMarkup(resize_keyboard=True)
 start_kb.add(

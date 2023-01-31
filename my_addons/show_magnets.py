@@ -1,6 +1,8 @@
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 from DB.database_for_bot import get_products
+
 
 def buy_item_kb(product_id):
     buy_item_kb = InlineKeyboardMarkup()

@@ -38,7 +38,7 @@ async def startup(_):
     """
     init()
     create_table()
-    asyncio.run(scheduler())
+    asyncio.create_task(scheduler())
 
 
 dp.register_message_handler(start_command, commands=['start'])

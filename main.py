@@ -58,6 +58,8 @@ dp.register_message_handler(name_get, Text(equals='Нет'), state=Form.done)
 dp.register_message_handler(cancel_handler, state='*', commands='cancel')
 dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')
 #Регистрирую напоминалку
+#СКОЛЬКО НЕРВНЫХ Я ПОТРАТИЛ НА ЭТУ &$&#&, я его и так делал и сяк, уже пытался через apschedule!
+#А ОКАЗЫВАЕТСЯ ВСЁ ДЕЛО БЫЛО В ВЕРСИИ ПИТОНА?!?!?!? Я усталь.
 dp.register_message_handler(schedule_command, Text(startswith="Напомнить "))
 #Регистрирую команду бана пользователя в групповом чате при помощи команды
 dp.register_message_handler(ban_user, commands=['да'], commands_prefix='!')
